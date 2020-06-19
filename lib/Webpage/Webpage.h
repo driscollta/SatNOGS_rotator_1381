@@ -33,8 +33,8 @@
 #include <ctype.h>
 #include <WiFi.h>
 
-#define WIFI_SSID "tigger"				//< WiFi SSID. Change this value
-#define WIFI_PASS "Belridge#117"		//< WiFi password. Change this value
+#define WIFI_SSID "xxxxxxx"				//< WiFi SSID. Change this value
+#define WIFI_PASS "xxxxxxx"		//< WiFi password. Change this value
 #define MAX_UNSIGNED_LONG 4294967295ULL	//< maximum value of unsigned long. correct for roll-over
 #define TIMEOUT_WIFI 10000				//< time, msec, to wait for WiFi to connect
 
