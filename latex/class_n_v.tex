@@ -1,0 +1,73 @@
+\hypertarget{class_n_v}{}\section{NV Class Reference}
+\label{class_n_v}\index{NV@{NV}}
+
+
+Class to organize variables stored in E\+E\+P\+R\+OM.  
+
+
+
+
+{\ttfamily \#include $<$N\+V.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_n_v_a738f6d0db4237e12583fc3dd58e4568a}\label{class_n_v_a738f6d0db4237e12583fc3dd58e4568a}} 
+void {\bfseries get} ()
+\item 
+\mbox{\Hypertarget{class_n_v_a0e3fa92337806e2ce2ef06e97b053dca}\label{class_n_v_a0e3fa92337806e2ce2ef06e97b053dca}} 
+void {\bfseries put} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_n_v_a10f37ece517cb42fdf5991e4900ca63a}\label{class_n_v_a10f37ece517cb42fdf5991e4900ca63a}} 
+uint32\+\_\+t {\bfseries magic}
+\item 
+\mbox{\Hypertarget{class_n_v_ad9ab82fbd811aa7db4af4eb966cf815f}\label{class_n_v_ad9ab82fbd811aa7db4af4eb966cf815f}} 
+uint16\+\_\+t {\bfseries mot0min}
+\item 
+\mbox{\Hypertarget{class_n_v_a483bc15d31bd32dc6609ad543c4c87fa}\label{class_n_v_a483bc15d31bd32dc6609ad543c4c87fa}} 
+uint16\+\_\+t {\bfseries mot0max}
+\item 
+\mbox{\Hypertarget{class_n_v_abaa0981dea4ade2ddea673d7ad57f26e}\label{class_n_v_abaa0981dea4ade2ddea673d7ad57f26e}} 
+uint16\+\_\+t {\bfseries mot1min}
+\item 
+\mbox{\Hypertarget{class_n_v_ad5a639de6752ae8125f3140bcc337814}\label{class_n_v_ad5a639de6752ae8125f3140bcc337814}} 
+uint16\+\_\+t {\bfseries mot1max}
+\item 
+\mbox{\Hypertarget{class_n_v_a3de436f72c645c6dc7170c4c5ded6730}\label{class_n_v_a3de436f72c645c6dc7170c4c5ded6730}} 
+uint8\+\_\+t {\bfseries B\+N\+O055cal} \mbox{[}N\+B\+N\+O055\+C\+A\+L\+B\+Y\+T\+ES\mbox{]}
+\item 
+\mbox{\Hypertarget{class_n_v_afff46f56d2ea7227f5c9906c74a632af}\label{class_n_v_afff46f56d2ea7227f5c9906c74a632af}} 
+float\+\_\+t {\bfseries mag\+\_\+decl}
+\item 
+\mbox{\Hypertarget{class_n_v_aaf773788993d94a2e57c18b33298f425}\label{class_n_v_aaf773788993d94a2e57c18b33298f425}} 
+float\+\_\+t {\bfseries m0\+\_\+azscale}
+\item 
+\mbox{\Hypertarget{class_n_v_af92dae3cee86a97d264e0efb37066084}\label{class_n_v_af92dae3cee86a97d264e0efb37066084}} 
+float\+\_\+t {\bfseries m0\+\_\+elscale}
+\item 
+\mbox{\Hypertarget{class_n_v_a381a3f1f0710c6f49d8f6693099a8d21}\label{class_n_v_a381a3f1f0710c6f49d8f6693099a8d21}} 
+float\+\_\+t {\bfseries m1\+\_\+azscale}
+\item 
+\mbox{\Hypertarget{class_n_v_a4cdf014c023f2010c60bb0de80998e53}\label{class_n_v_a4cdf014c023f2010c60bb0de80998e53}} 
+float\+\_\+t {\bfseries m1\+\_\+elscale}
+\item 
+\mbox{\Hypertarget{class_n_v_a8aae4cc154a2b2ede54c9d2200242fe8}\label{class_n_v_a8aae4cc154a2b2ede54c9d2200242fe8}} 
+uint8\+\_\+t {\bfseries best\+\_\+az\+\_\+motor}
+\item 
+\mbox{\Hypertarget{class_n_v_a7735a5942850e65de6900f0937d9f81f}\label{class_n_v_a7735a5942850e65de6900f0937d9f81f}} 
+uint8\+\_\+t {\bfseries init\+\_\+step}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to organize variables stored in E\+E\+P\+R\+OM. 
+
+The public class variables are mirrored in R\+AM, so change nv then call put(), or call get() then access\hypertarget{main_8cpp_license}{}\subsection{License}\label{main_8cpp_license}
+Copyright (c) 2020 Tom Driscoll. Based on code by Elwood Downey found on Clearskyinstitute.\+com and published in Q\+EX Mar/\+Apr 2016. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+N\+V/N\+V.\+h\end{DoxyCompactItemize}

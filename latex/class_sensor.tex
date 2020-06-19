@@ -1,0 +1,156 @@
+\hypertarget{class_sensor}{}\section{Sensor Class Reference}
+\label{class_sensor}\index{Sensor@{Sensor}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sensor_a342d6d11ef572c8cba92cb76fb1a294b}\label{class_sensor_a342d6d11ef572c8cba92cb76fb1a294b}} 
+\hyperlink{class_sensor_a342d6d11ef572c8cba92cb76fb1a294b}{Sensor} ()
+\begin{DoxyCompactList}\small\item\em class constructor \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_a7deffa1efa1d54a560b6bf808e3fe9c8}{check\+Sensor} (Wi\+Fi\+Client client)
+\begin{DoxyCompactList}\small\item\em test that the \hyperlink{class_sensor}{Sensor} is still working \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{class_sensor_a8a27b409dbfc1f335cc8f05cce30e7ec}{get\+TempC} ()
+\begin{DoxyCompactList}\small\item\em read the current temperature, in degrees C \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_a106849dcbe07faca4c96547f1278ad72}{save\+Calibration} (void)
+\begin{DoxyCompactList}\small\item\em read the sensor calibration values and save into E\+E\+P\+R\+OM. \end{DoxyCompactList}\item 
+float \hyperlink{class_sensor_a12bb1d7269370d6f8571759fd08d285f}{get\+Sensor\+Az} ()
+\begin{DoxyCompactList}\small\item\em return the current sensor azimuth \end{DoxyCompactList}\item 
+float \hyperlink{class_sensor_a6fd128ef38ef96c21c0b35d95ab68cef}{get\+Sensor\+El} ()
+\begin{DoxyCompactList}\small\item\em return the current sensor elevation \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_afc67b7e3e26688fa9553c6ae6f07c04b}{read\+Az\+ElT} ()
+\begin{DoxyCompactList}\small\item\em read the current az and el, corrected for mag decl but not necessarily calibrated. \end{DoxyCompactList}\item 
+void \hyperlink{class_sensor_afd75951a11c5609b995e270e4c087948}{send\+New\+Values} (Wi\+Fi\+Client client)
+\begin{DoxyCompactList}\small\item\em send latest values to web page \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sensor_a250d9c66e17d1c17cf9f9d8ced730ac4}\label{class_sensor_a250d9c66e17d1c17cf9f9d8ced730ac4}} 
+bool {\bfseries connected} ()
+\item 
+void \hyperlink{class_sensor_ac9a8e83f50e6051a14dae3eef24bdba2}{install\+Calibration} (void)
+\begin{DoxyCompactList}\small\item\em install previously stored calibration data from E\+E\+P\+R\+OM if it looks valid. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sensor_af8ed43603baf0c0b6fb264241b6ee91f}{override\+Value} (char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em process name = value pair \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sensor_a7deffa1efa1d54a560b6bf808e3fe9c8}\label{class_sensor_a7deffa1efa1d54a560b6bf808e3fe9c8}} 
+\index{Sensor@{Sensor}!check\+Sensor@{check\+Sensor}}
+\index{check\+Sensor@{check\+Sensor}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{check\+Sensor()}{checkSensor()}}
+{\footnotesize\ttfamily void Sensor\+::check\+Sensor (\begin{DoxyParamCaption}\item[{Wi\+Fi\+Client}]{client }\end{DoxyParamCaption})}
+
+
+
+test that the \hyperlink{class_sensor}{Sensor} is still working 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & Wi\+Fi\+Client reference when called from send\+New\+Values \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sensor_a12bb1d7269370d6f8571759fd08d285f}\label{class_sensor_a12bb1d7269370d6f8571759fd08d285f}} 
+\index{Sensor@{Sensor}!get\+Sensor\+Az@{get\+Sensor\+Az}}
+\index{get\+Sensor\+Az@{get\+Sensor\+Az}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{get\+Sensor\+Az()}{getSensorAz()}}
+{\footnotesize\ttfamily float Sensor\+::get\+Sensor\+Az (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the current sensor azimuth 
+
+This does not query the B\+N\+O055 sensor, just returns the last value read
+
+\begin{DoxyReturn}{Returns}
+the last measured \hyperlink{class_sensor}{Sensor} azimuth 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sensor_a6fd128ef38ef96c21c0b35d95ab68cef}\label{class_sensor_a6fd128ef38ef96c21c0b35d95ab68cef}} 
+\index{Sensor@{Sensor}!get\+Sensor\+El@{get\+Sensor\+El}}
+\index{get\+Sensor\+El@{get\+Sensor\+El}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{get\+Sensor\+El()}{getSensorEl()}}
+{\footnotesize\ttfamily float Sensor\+::get\+Sensor\+El (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+return the current sensor elevation 
+
+This does not query the B\+N\+O055 sensor, just returns the last value read
+
+\begin{DoxyReturn}{Returns}
+the last measured \hyperlink{class_sensor}{Sensor} elevation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sensor_a8a27b409dbfc1f335cc8f05cce30e7ec}\label{class_sensor_a8a27b409dbfc1f335cc8f05cce30e7ec}} 
+\index{Sensor@{Sensor}!get\+TempC@{get\+TempC}}
+\index{get\+TempC@{get\+TempC}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{get\+Temp\+C()}{getTempC()}}
+{\footnotesize\ttfamily int8\+\_\+t Sensor\+::get\+TempC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+read the current temperature, in degrees C 
+
+\begin{DoxyReturn}{Returns}
+the sensor temperature 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sensor_ac9a8e83f50e6051a14dae3eef24bdba2}\label{class_sensor_ac9a8e83f50e6051a14dae3eef24bdba2}} 
+\index{Sensor@{Sensor}!install\+Calibration@{install\+Calibration}}
+\index{install\+Calibration@{install\+Calibration}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{install\+Calibration()}{installCalibration()}}
+{\footnotesize\ttfamily void Sensor\+::install\+Calibration (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+install previously stored calibration data from E\+E\+P\+R\+OM if it looks valid. 
+
+Use stock Adafruit library so pulled from post by protonstorm at \href{https://forums.adafruit.com/viewtopic.php?f=19&t=75497}{\tt https\+://forums.\+adafruit.\+com/viewtopic.\+php?f=19\&t=75497} \mbox{\Hypertarget{class_sensor_af8ed43603baf0c0b6fb264241b6ee91f}\label{class_sensor_af8ed43603baf0c0b6fb264241b6ee91f}} 
+\index{Sensor@{Sensor}!override\+Value@{override\+Value}}
+\index{override\+Value@{override\+Value}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{override\+Value()}{overrideValue()}}
+{\footnotesize\ttfamily bool Sensor\+::override\+Value (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+process name = value pair 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the web page id where value was entered \\
+\hline
+{\em value} & a value to operate on, if needed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return true if \hyperlink{class_sensor}{Sensor} handles this \textquotesingle{}name\textquotesingle{} command, false if \hyperlink{class_sensor}{Sensor} doesn\textquotesingle{}t recognize it 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sensor_afc67b7e3e26688fa9553c6ae6f07c04b}\label{class_sensor_afc67b7e3e26688fa9553c6ae6f07c04b}} 
+\index{Sensor@{Sensor}!read\+Az\+ElT@{read\+Az\+ElT}}
+\index{read\+Az\+ElT@{read\+Az\+ElT}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{read\+Az\+El\+T()}{readAzElT()}}
+{\footnotesize\ttfamily void Sensor\+::read\+Az\+ElT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+read the current az and el, corrected for mag decl but not necessarily calibrated. 
+
+N.\+B. we assume this will only be called if we know the sensor is connected. N.\+B. Adafruit board\+: the short dimension is parallel to the antenna boom, the populated side of the board faces upwards and the side with the control signals (S\+DA, S\+CL etc) points in the rear direction of the antenna pattern. Note that az/el is a left-\/hand coordinate system. This is only called repeatedly from loop() \mbox{\Hypertarget{class_sensor_a106849dcbe07faca4c96547f1278ad72}\label{class_sensor_a106849dcbe07faca4c96547f1278ad72}} 
+\index{Sensor@{Sensor}!save\+Calibration@{save\+Calibration}}
+\index{save\+Calibration@{save\+Calibration}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{save\+Calibration()}{saveCalibration()}}
+{\footnotesize\ttfamily void Sensor\+::save\+Calibration (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+read the sensor calibration values and save into E\+E\+P\+R\+OM. 
+
+Use stock Adafruit library so pulled from post by protonstorm at \href{https://forums.adafruit.com/viewtopic.php?f=19&t=75497}{\tt https\+://forums.\+adafruit.\+com/viewtopic.\+php?f=19\&t=75497} \mbox{\Hypertarget{class_sensor_afd75951a11c5609b995e270e4c087948}\label{class_sensor_afd75951a11c5609b995e270e4c087948}} 
+\index{Sensor@{Sensor}!send\+New\+Values@{send\+New\+Values}}
+\index{send\+New\+Values@{send\+New\+Values}!Sensor@{Sensor}}
+\subsubsection{\texorpdfstring{send\+New\+Values()}{sendNewValues()}}
+{\footnotesize\ttfamily void Sensor\+::send\+New\+Values (\begin{DoxyParamCaption}\item[{Wi\+Fi\+Client}]{client }\end{DoxyParamCaption})}
+
+
+
+send latest values to web page 
+
+N.\+B. labels must match ids in web page 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Sensor/Sensor.\+h\item 
+lib/\+Sensor/Sensor.\+cpp\end{DoxyCompactItemize}

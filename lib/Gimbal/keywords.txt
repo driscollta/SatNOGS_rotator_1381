@@ -1,0 +1,8 @@
+Gimbal	KEYWORD1
+calibrated	KEYWORD2
+connected	KEYWORD2
+sendNewValues	KEYWORD2
+overrideValue	KEYWORD2
+moveToAzEl	KEYWORD2
+
+gimbal          KEYWORD3

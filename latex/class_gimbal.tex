@@ -1,0 +1,104 @@
+\hypertarget{class_gimbal}{}\section{Gimbal Class Reference}
+\label{class_gimbal}\index{Gimbal@{Gimbal}}
+
+
+Class to control two motors to track a target az and el using the Adafruit I2C interface.  
+
+
+
+
+{\ttfamily \#include $<$Gimbal.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_gimbal_a5e932498d088171ef32a3b6e2bc03cfc}{Gimbal} ()
+\begin{DoxyCompactList}\small\item\em Class to control two motors to track a target az and el using the Adafruit I2C interface. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gimbal_a2444c7e2b066061dfa28437114f076c1}\label{class_gimbal_a2444c7e2b066061dfa28437114f076c1}} 
+void \hyperlink{class_gimbal_a2444c7e2b066061dfa28437114f076c1}{reset\+Init\+Step} ()
+\begin{DoxyCompactList}\small\item\em reset init\+Step to 0 to redo calibration \end{DoxyCompactList}\item 
+void \hyperlink{class_gimbal_a391c53aaaa9fb6ec8547d87c3cc09933}{move\+To\+Az\+El} (float az\+\_\+t, float el\+\_\+t)
+\begin{DoxyCompactList}\small\item\em move motors towards the given new target az and el \end{DoxyCompactList}\item 
+void \hyperlink{class_gimbal_ab77d72c96b391e64b6c08bb3fa6c7f49}{send\+New\+Values} (Wi\+Fi\+Client client)
+\begin{DoxyCompactList}\small\item\em send latest values to web page \end{DoxyCompactList}\item 
+bool \hyperlink{class_gimbal_a121d20adcddc320e78d5aa391189d0b6}{override\+Value} (char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em process name = value pair \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gimbal_a7259c5e491f330fed6d2aaafc955cd86}\label{class_gimbal_a7259c5e491f330fed6d2aaafc955cd86}} 
+bool {\bfseries connected} ()
+\item 
+\mbox{\Hypertarget{class_gimbal_ab16f668ecf67eb27d471a2e4a687c0ed}\label{class_gimbal_ab16f668ecf67eb27d471a2e4a687c0ed}} 
+bool {\bfseries calibrated} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to control two motors to track a target az and el using the Adafruit I2C interface. 
+
+\hypertarget{main_8cpp_dependencies}{}\subsection{Dependencies}\label{main_8cpp_dependencies}
+This firmware depends on Adafruit Unified \hyperlink{class_sensor}{Sensor} v1.\+1.\+3 Library Adafruit B\+N\+O055 v1.\+2.\+0 Adafruit Bus\+IO v1.\+3.\+0 Adafruit P\+WM Servo Driver v2.\+4.\+0 being present on your system. Please make sure you have installed the latest version before using this firmware.\hypertarget{main_8cpp_license}{}\subsection{License}\label{main_8cpp_license}
+Copyright (c) 2020 Tom Driscoll. Based on code by Elwood Downey found on Clearskyinstitute.\+com and published in Q\+EX Mar/\+Apr 2016. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_gimbal_a5e932498d088171ef32a3b6e2bc03cfc}\label{class_gimbal_a5e932498d088171ef32a3b6e2bc03cfc}} 
+\index{Gimbal@{Gimbal}!Gimbal@{Gimbal}}
+\index{Gimbal@{Gimbal}!Gimbal@{Gimbal}}
+\subsubsection{\texorpdfstring{Gimbal()}{Gimbal()}}
+{\footnotesize\ttfamily Gimbal\+::\+Gimbal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Class to control two motors to track a target az and el using the Adafruit I2C interface. 
+
+\hypertarget{main_8cpp_dependencies}{}\subsection{Dependencies}\label{main_8cpp_dependencies}
+This firmware depends on Adafruit Unified \hyperlink{class_sensor}{Sensor} v1.\+1.\+3 Library Adafruit B\+N\+O055 v1.\+2.\+0 Adafruit Bus\+IO v1.\+3.\+0 Adafruit P\+WM Servo Driver v2.\+4.\+0 being present on your system. Please make sure you have installed the latest version before using this firmware.\hypertarget{main_8cpp_license}{}\subsection{License}\label{main_8cpp_license}
+Copyright (c) 2020 Tom Driscoll. Based on code by Elwood Downey found on Clearskyinstitute.\+com and published in Q\+EX Mar/\+Apr 2016. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE.
+
+Constructor for \hyperlink{class_gimbal}{Gimbal} class 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gimbal_a391c53aaaa9fb6ec8547d87c3cc09933}\label{class_gimbal_a391c53aaaa9fb6ec8547d87c3cc09933}} 
+\index{Gimbal@{Gimbal}!move\+To\+Az\+El@{move\+To\+Az\+El}}
+\index{move\+To\+Az\+El@{move\+To\+Az\+El}!Gimbal@{Gimbal}}
+\subsubsection{\texorpdfstring{move\+To\+Az\+El()}{moveToAzEl()}}
+{\footnotesize\ttfamily void Gimbal\+::move\+To\+Az\+El (\begin{DoxyParamCaption}\item[{float}]{az\+\_\+t,  }\item[{float}]{el\+\_\+t }\end{DoxyParamCaption})}
+
+
+
+move motors towards the given new target az and el 
+
+This function blocks while reading \hyperlink{class_sensor}{Sensor}. Make sure sensor is connected before calling! \mbox{\Hypertarget{class_gimbal_a121d20adcddc320e78d5aa391189d0b6}\label{class_gimbal_a121d20adcddc320e78d5aa391189d0b6}} 
+\index{Gimbal@{Gimbal}!override\+Value@{override\+Value}}
+\index{override\+Value@{override\+Value}!Gimbal@{Gimbal}}
+\subsubsection{\texorpdfstring{override\+Value()}{overrideValue()}}
+{\footnotesize\ttfamily bool Gimbal\+::override\+Value (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+process name = value pair 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the web page id where value was entered \\
+\hline
+{\em value} & a value to operate on, if needed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return true if \hyperlink{class_gimbal}{Gimbal} handles this \textquotesingle{}name\textquotesingle{} command, false if \hyperlink{class_gimbal}{Gimbal} doesn\textquotesingle{}t recognize it 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gimbal_ab77d72c96b391e64b6c08bb3fa6c7f49}\label{class_gimbal_ab77d72c96b391e64b6c08bb3fa6c7f49}} 
+\index{Gimbal@{Gimbal}!send\+New\+Values@{send\+New\+Values}}
+\index{send\+New\+Values@{send\+New\+Values}!Gimbal@{Gimbal}}
+\subsubsection{\texorpdfstring{send\+New\+Values()}{sendNewValues()}}
+{\footnotesize\ttfamily void Gimbal\+::send\+New\+Values (\begin{DoxyParamCaption}\item[{Wi\+Fi\+Client}]{client }\end{DoxyParamCaption})}
+
+
+
+send latest values to web page 
+
+N.\+B. labels must match ids in web page 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Gimbal/Gimbal.\+h\item 
+lib/\+Gimbal/Gimbal.\+cpp\end{DoxyCompactItemize}
