@@ -42,8 +42,18 @@ class Sensor {
     private:
 	int8_t temperature;
 	float az_sensor, el_sensor;
+	//< bit, status for debugging and display
+	/* Self Test Results: 1 = test passed, 0 = test failed
+    Bit 0 = Accelerometer self test
+    Bit 1 = Magnetometer self test
+    Bit 2 = Gyroscope self test
+    Bit 3 = MCU self test
+   	*/
+	uint8_t sys, gyro, accel, mag;
+	uint8_t system_status, self_test_results, system_error;
+	bool calok;
 	Adafruit_BNO055 *bno;	// sensor detail
-	const bool DEBUG_SENSOR = true;
+	const bool DEBUG_SENSOR = false;
 	bool sensor_found;		//< whether sensor is connected
 	bool calibrated(uint8_t& sys, uint8_t& gyro, uint8_t& accel, uint8_t& mag);
 	enum {
@@ -53,7 +63,7 @@ class Sensor {
     public:
 
 	Sensor();
-	void checkSensor(WiFiClient client);
+	void checkSensor();
 	int8_t getTempC();
 	void saveCalibration(void);
 	float getSensorAz ();

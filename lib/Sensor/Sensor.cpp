@@ -21,7 +21,6 @@
 #include "Sensor.h"
 #include "NV.h"
 #include "Webpage.h"
-uint8_t sensor_time_out;
 
 /*! @brief class constructor
  */
@@ -31,39 +30,33 @@ Sensor::Sensor()
 	bno = new Adafruit_BNO055(-1, I2CADDR);
 	sensor_found = bno->begin(Adafruit_BNO055::OPERATION_MODE_NDOF);
 	installCalibration();
-	sensor_time_out = 0;
+	system_status = 1;
+	self_test_results = 0;
+	system_error = 3;
+	calok = false;
 }
 
 /*! @brief test that the Sensor is still working
 *
-*	@param client WiFiClient reference when called from sendNewValues
 */
-void Sensor::checkSensor(WiFiClient client)
+void Sensor::checkSensor()
 {
-	/* Get the system status values (mostly for debugging purposes) */
-  	uint8_t system_status, self_test_results, system_error;
-  	system_status = self_test_results = system_error = 0;
-  	bno->getSystemStatus(&system_status, &self_test_results, &system_error);
-		// check Sensor if waited > 10 seconds since sendNewValues is called every 0.5 seconds
-		/* Self Test Results: 1 = test passed, 0 = test failed
-     	Bit 0 = Accelerometer self test
-     	Bit 1 = Magnetometer self test
-     	Bit 2 = Gyroscope self test
-     	Bit 3 = MCU self test
-   		*/
-	client.print (F("SS_STSStatus=")); client.println (0x08 & self_test_results?"pass+":"fail!");
-	client.print (F("SS_STGStatus=")); client.println (0x04 & self_test_results?"pass+":"fail!");
-	client.print (F("SS_STMStatus=")); client.println (0x02 & self_test_results?"pass+":"fail!");
-	client.print (F("SS_STAStatus=")); client.println (0x01 & self_test_results?"pass+":"fail!");
+	/* Get the system status values (mostly for debugging purposes) */ 	
+  	if (sensor_found){
+		  bno->getSystemStatus(&system_status, &self_test_results, &system_error);
+	  }
 	if (system_error > 0 || system_status == 1 || !sensor_found) {
 		sensor_found = bno->begin(Adafruit_BNO055::OPERATION_MODE_NDOF);	//< restart Sensor
 		delay(20);
 		if (sensor_found) {
-	    	if (sensor->DEBUG_SENSOR) {
-				Serial.println (F("Sensor found"));
-			}
-			bno->setExtCrystalUse(true);
 			webpage->setUserMessage(F("Sensor error... restarting sensor!"));
+		} else {
+			// still didn't find sensor
+			system_status = 1;
+			self_test_results = 0;
+			system_error = 3;
+			calok = false;
+			webpage->setUserMessage(F("Sensor not found!"));
 		}
 		installCalibration();
 	} else { // no error
@@ -79,7 +72,7 @@ void Sensor::checkSensor(WiFiClient client)
 			webpage->setUserMessage(F("Initializing Sensor Peripherals"));
 		}
 	}
-
+	calok = calibrated (sys, gyro, accel, mag);
 	/* System Status (see section 4.3.58)
      0 = Idle
      1 = System Error
@@ -266,28 +259,24 @@ void Sensor::sendNewValues (WiFiClient client)
 	client.print (F("SS_El=")); client.println (el_sensor, 1);
 
 	client.print (F("SS_Temp=")); client.println (temperature);
-	if (sensor_time_out++ > 20) {
-		sensor_time_out = 0;
-		uint8_t sys, gyro, accel, mag;
-		bool calok = calibrated (sys, gyro, accel, mag);
-		if (calok) {
-	    	client.println (F("SS_Status=Ok+"));
-		}
-		else {
-	    	client.println (F("SS_Status=Uncalibrated!"));
-		}
-		client.print (F("SS_SCal=")); client.println (sys);
-		client.print (F("SS_GCal=")); client.println (gyro);
-		client.print (F("SS_MCal=")); client.println (mag);
-		client.print (F("SS_ACal=")); client.println (accel);
-
-		client.print (F("SS_Save="));
-		if (calok && sys == 3 && gyro == 3 && accel == 3 && mag == 3) {
-	    	client.println (F("true"));
-		} else {
-	    	client.println (F("false"));
-		}
-		checkSensor(client);
+	client.print (F("SS_STSStatus=")); client.println (0x08 & self_test_results?"pass+":"fail!");
+	client.print (F("SS_STGStatus=")); client.println (0x04 & self_test_results?"pass+":"fail!");
+	client.print (F("SS_STMStatus=")); client.println (0x02 & self_test_results?"pass+":"fail!");
+	client.print (F("SS_STAStatus=")); client.println (0x01 & self_test_results?"pass+":"fail!");
+	client.print (F("SS_SCal=")); client.println (sys);
+	client.print (F("SS_GCal=")); client.println (gyro);
+	client.print (F("SS_MCal=")); client.println (mag);
+	client.print (F("SS_ACal=")); client.println (accel);
+	if (calok) {
+	    client.println (F("SS_Status=Ok+"));
+	} else {
+	    client.println (F("SS_Status=Uncalibrated!"));
+	}
+	client.print (F("SS_Save="));
+	if (calok && sys == 3 && gyro == 3 && accel == 3 && mag == 3) {
+	    client.println (F("true"));
+	} else {
+	    client.println (F("false"));
 	}
 }
 

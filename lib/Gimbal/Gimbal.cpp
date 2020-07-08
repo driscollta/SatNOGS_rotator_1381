@@ -35,11 +35,15 @@
 #include "NV.h"
 #include "Webpage.h"
 #include "Sensor.h"
+//use pin 21 to read the PCA9685 OE. This pin has a pull-down resistor built into it
+#define  PCA9685OEPin  21 
 
 /*! @brief Constructor for Gimbal class
  */
 Gimbal::Gimbal ()
 {
+	//todo set up PCA9685 OE monitor pin
+	pinMode(PCA9685OEPin, INPUT);
 	//< first confirm whether controller is present
 	Wire.begin();
 	Wire.beginTransmission(I2C_ADDR);
@@ -167,6 +171,12 @@ void Gimbal::calibrate (float& az_s, float& el_s)
 	switch (init_step++) {
 
 	case 0:
+		if (gimbal->DEBUG_GIMBAL){
+	    	Serial.print(F("Init 0: Mot 0 Moves: "));
+			Serial.println(motor[0].min + (1-CAL_FRAC)/2*range0, 0);
+			Serial.print(F("Init 0: Mot 1 Moves: "));
+			Serial.println(motor[1].min + (1-CAL_FRAC)/2*range1, 0);
+		}
 	    //< move near min of each range. setMotorPosition() uses microseconds
 	    setMotorPosition (0, motor[0].min + (1-CAL_FRAC)/2*range0);
 	    setMotorPosition (1, motor[1].min + (1-CAL_FRAC)/2*range1);
@@ -402,13 +412,23 @@ void Gimbal::sendNewValues (WiFiClient client)
 	}
 	client.print (F("G_Mot1Max=")); client.println (motor[0].max);
 	client.print (F("G_Mot1Min=")); client.println (motor[0].min);
-	client.print (F("G_Mot1Max=")); client.println (motor[0].max);
+
+	client.print (F("G_Mot1AzCal=")); client.println (1/motor[0].az_scale);
+	client.print (F("G_Mot1ElCal=")); client.println (1/motor[0].el_scale);
 
 	client.print (F("G_Mot2Min=")); client.println (motor[1].min);
 	client.print (F("G_Mot2Max=")); client.println (motor[1].max);
 
+	client.print (F("G_Mot2AzCal=")); client.println (1/motor[1].az_scale);
+	client.print (F("G_Mot2ElCal=")); client.println (1/motor[1].el_scale);
+	// HIGH means limit switch is applying 3v to OE input of PCA9685,
+	// which is read by PCA9685OEPin. OE is normally pulled down or 0v
+	//https://learn.adafruit.com/16-channel-pwm-servo-driver/pinouts
+	bool pca9685_is_disabled =  digitalRead(PCA9685OEPin);
 	client.print (F("G_Status="));
-	if (motor[0].atmin) {
+	if (pca9685_is_disabled) {
+		client.println (F("Gimbal fault!"));
+	} else if (motor[0].atmin) {
 		client.println (F("Servo 1 at Min!"));
 	} else if (motor[0].atmax) {
 		client.println (F("Servo 1 at Max!"));

@@ -1,4 +1,20 @@
 Webpage	KEYWORD1
+
+is_timed_out	KEYWORD2
+overrideValue	KEYWORD2
+printHTMLStyle	KEYWORD2
+printHTMLSensorTable	KEYWORD2
+printHTMLScripts	KEYWORD2
+printHTMLGimbalTable	KEYWORD2
+printHTMLTopTable	KEYWORD2
+readNextClientChar	KEYWORD2
+reboot	KEYWORD2
+sendMainPage	KEYWORD2
+sendNewValues	KEYWORD2
+sendPlainHeader	KEYWORD2
+sendHTMLHeader	KEYWORD2
+sendEmptyResponse	KEYWORD2
+send404Page	KEYWORD2
 checkEthernet	KEYWORD2
 setUserMessage	KEYWORD2
-
+webpage 	KEYWORD3

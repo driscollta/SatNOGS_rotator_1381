@@ -1,0 +1,8 @@
+Easycomm	KEYWORD1
+reportPosition	KEYWORD2
+dealWithStatusCommand	KEYWORD2
+isNumber	KEYWORD2
+readAzEl	KEYWORD2
+easycomm_process	KEYWORD2
+sendNewValues	KEYWORD2
+easycomm          KEYWORD3

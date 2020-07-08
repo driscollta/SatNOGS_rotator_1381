@@ -33,7 +33,6 @@
 
 #include <Wire.h>
 #include <WiFi.h>
-#include <SPI.h>
 #include <Adafruit_PWMServoDriver.h>
 
 #include "Sensor.h"

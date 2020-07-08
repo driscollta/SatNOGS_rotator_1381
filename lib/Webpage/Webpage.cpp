@@ -49,7 +49,6 @@ Webpage::Webpage()
     //< init user message mechanism
 	user_message_F = F("Hello+");		// <page welcome message
     memset (user_message_s, 0, sizeof(user_message_s));
-    Serial.println ("Creating WiFi server");
 
     //< start the Server on port 80
 	httpServer = new WiFiServer(80);
@@ -84,7 +83,8 @@ void Webpage::setUserMessage (const __FlashStringHelper *ifsh, const char *msg, 
 
 /*! @brief call this occasionally to check for Ethernet activity
  */
-void Webpage::checkEthernet()
+void Webpage::
+checkEthernet()
 {
     //< check WiFi if not connected and waited > 5 seconds
     if (WiFi.status() != WL_CONNECTED && (wifi_time_out++ > 25)) {
@@ -106,14 +106,15 @@ void Webpage::checkEthernet()
 	//< read header, collecting first line and discarding rest until find blank line
 	while (!eoh && (c = readNextClientChar (client, &to))) {
 	    if (c == '\n') {
-		if (!fldone) {
-		    firstline[fll] = '\0';
-		    fldone = true;
-		}
-		if (prevc == '\n')
-		    eoh = true;
+		    if (!fldone) {
+		        firstline[fll] = '\0';
+		        fldone = true;
+		    }
+		    if (prevc == '\n') {
+		        eoh = true;
+            }
 	    } else if (!fldone && fll < sizeof(firstline)-1) {
-		firstline[fll++] = c;
+		    firstline[fll++] = c;
 	    }
 	    prevc = c;
 	}
@@ -159,13 +160,15 @@ char Webpage::readNextClientChar (WiFiClient client, uint32_t *to)
 	    if (millis() > *to + timeout ) {
 		    return (0);
 	    }
-	    if (!client.available())
+	    if (!client.available()){
 		    continue;
-	    char c = client.read();
+        }
+        char c = client.read();
 	    *to = millis();
-	    if (c == '\r')
+	    if (c == '\r'){
 		    continue;
-	    return (c);
+        }
+        return (c);
 	}
 	return (0);
 }
@@ -670,6 +673,30 @@ void Webpage::printHTMLGimbalTable (WiFiClient client)
         "               <td> \r\n"
         "                   <input id='G_Mot2Max_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
+        "               </td> \r\n"
+        "           </tr> \r\n"
+        "           <tr class='odd-row' > \r\n"
+        "               <td> \r\n"
+        "               </td> \r\n"
+        "               <td class='datum-label' > az calibration, &deg;/&micro;s </td> \r\n"
+        "               <td id='G_Mot1AzCal' class='datum'  width = 40 > ---- </td> \r\n"
+        "               <td> \r\n"
+        "               </td> \r\n"
+        "               <td class='datum-label' > az calibration, &deg;/&micro;s </td> \r\n"
+        "               <td id='G_Mot2AzCal' class='datum'  width = 40 > ---- </td> \r\n"
+        "               <td> \r\n"
+        "               </td> \r\n"
+        "           </tr> \r\n"
+        "           <tr class='even-row' > \r\n"
+        "               <td> \r\n"
+        "               </td> \r\n"
+        "               <td class='datum-label' > el calibration, &deg;/&micro;s </td> \r\n"
+        "               <td id='G_Mot1ElCal' class='datum'  width = 40 > ---- </td> \r\n"
+        "               <td> \r\n"
+        "               </td> \r\n"
+        "               <td class='datum-label' > el calibration, &deg;/&micro;s </td> \r\n"
+        "               <td id='G_Mot2ElCal' class='datum'  width = 40 > ---- </td> \r\n"
+        "               <td> \r\n"
         "               </td> \r\n"
         "           </tr> \r\n"
         " \r\n"

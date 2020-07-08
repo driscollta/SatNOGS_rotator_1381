@@ -36,10 +36,11 @@
 #include "NV.h"
 #include "Gimbal.h"
 #include "Easycomm.h"
-#define BAUDRATE      115200  ///<  Baudrate of Easycomm II protocol
-#define WP_INTERVAL   500     ///<  milliseconds interval for checking WebPage
-#define EC_INTERVAL   10      ///<  milliseconds interval for checking Serial for Easycomm commands
-#define SENSOR_INTERVAL   500 ///<  milliseconds interval for reading Sensor
+#define BAUDRATE        115200  ///<  Baudrate of Easycomm II protocol
+#define WP_INTERVAL      500     ///<  milliseconds interval for checking WebPage
+#define EC_INTERVAL      10      ///<  milliseconds interval for checking Serial for Easycomm commands
+#define SENSOR_INTERVAL  500 ///<  milliseconds interval for reading Sensor
+#define CHECK_SENSOR_INTERVAL   60000 ///<  milliseconds interval for checking Sensor status
 
 Sensor *sensor;
 Webpage *webpage;
@@ -50,11 +51,13 @@ bool is_timed_out(uint32_t start_time, uint32_t time_interval);
 uint32_t previous_time_ec;
 uint32_t previous_time_wp;
 uint32_t previous_time_sensor;
+uint32_t previous_time_check_sensor;
 
 void setup() {
   previous_time_ec = millis();
   previous_time_wp = millis();
   previous_time_sensor = millis();
+  previous_time_check_sensor = millis();
   Serial.begin(BAUDRATE);
   delay(1000);
   nv = new NV();
@@ -62,6 +65,7 @@ void setup() {
   gimbal = new Gimbal();
   webpage = new Webpage();
   delay(1000);
+  sensor->checkSensor();
 }
 
 void loop() {
@@ -80,6 +84,12 @@ void loop() {
     previous_time_sensor = millis();
     sensor->readAzElT();
   }
+  // read Sensor status
+  if (is_timed_out(previous_time_check_sensor, CHECK_SENSOR_INTERVAL)) {
+		previous_time_check_sensor = millis();
+		sensor->checkSensor();
+	}
+
 }
 
 bool is_timed_out(uint32_t startTime_ms, uint32_t time_out_time) {

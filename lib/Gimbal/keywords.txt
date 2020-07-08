@@ -1,8 +1,15 @@
 Gimbal	KEYWORD1
-calibrated	KEYWORD2
-connected	KEYWORD2
+setMotorPosition	KEYWORD2
+calibrate	KEYWORD2
+seekTarget	KEYWORD2
+azDist	KEYWORD2
+reCal	KEYWORD2
+installCalibration	KEYWORD2
+saveCalibration	KEYWORD2
+resetInitStep	KEYWORD2
+moveToAzEl	KEYWORD2
 sendNewValues	KEYWORD2
 overrideValue	KEYWORD2
-moveToAzEl	KEYWORD2
-
+connected	KEYWORD2
+calibrated	KEYWORD2
 gimbal          KEYWORD3
