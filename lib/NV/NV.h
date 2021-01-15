@@ -52,7 +52,8 @@ class NV {
         uint8_t best_az_motor;              //< motor that has the most effect in azimuth direction either 0 or 1
         uint8_t init_step;                  //< step number that the calibration routine ran when this cal was saved. s.b. 4
 
-        void get() {
+        void get() 
+        {
             EEPROM.get (EEBASE, *this);
             if (magic != MAGIC) {               //< EEPROM was never written, or it was corrupted
                 memset (this, 0, sizeof(*this));//< erase EEPROM values
@@ -62,7 +63,8 @@ class NV {
             }
         }
 
-        void put() {
+        void put() 
+        {
             EEPROM.put (EEBASE, *this);
             EEPROM.commit();
         }

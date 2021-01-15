@@ -50,8 +50,8 @@ class Gimbal {
 	static const uint8_t MOT1_UNIT = 0;		// motor 1 I2C unit number
 	static const uint8_t MOT2_UNIT = 1;		// motor 2 I2C unit number
 	bool gimbal_found;						// whether PWM controller is present
-	static constexpr float G_HOME_AZ = 0.0;	// gimbal az position for calibration
-	static constexpr float G_HOME_EL = 0.0; // gimbal el position for calibration
+	static constexpr float G_HOME_AZ = 0.0;	// gimbal az home position for calibration
+	static constexpr float G_HOME_EL = 45.0; // gimbal el home position for calibration
 	// motor info
 	typedef struct {
 	    float az_scale, el_scale;			// az and el scale: steps (del usec) per degree
@@ -76,6 +76,7 @@ class Gimbal {
 	uint32_t last_update;						// millis() time of last moveToAzEl
 	float prevfast_az, prevfast_el;				// previous pointing position
 	float prevstop_az, prevstop_el;				// previous stopped position for calibration
+	
 	void setMotorPosition (uint8_t motn, uint16_t newpos);
 	void calibrate (float &az_s, float &el_s);
 	void seekTarget (float& az_t, float& el_t, float& az_s, float& el_s);
@@ -83,8 +84,9 @@ class Gimbal {
 	void reCal(float& az_s, float& el_s);
 	void installCalibration();
 	void saveCalibration();
+	
     public:
-
+	boolean isCalibrating;
 	Gimbal();
 	void resetInitStep();
 	void moveToAzEl (float az_t, float el_t);

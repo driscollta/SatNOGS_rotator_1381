@@ -42,9 +42,9 @@ Sensor::Sensor()
 void Sensor::checkSensor()
 {
 	/* Get the system status values (mostly for debugging purposes) */ 	
-  	if (sensor_found){
+  	if (sensor_found) {
 		  bno->getSystemStatus(&system_status, &self_test_results, &system_error);
-	  }
+	}
 	if (system_error > 0 || system_status == 1 || !sensor_found) {
 		sensor_found = bno->begin(Adafruit_BNO055::OPERATION_MODE_NDOF);	//< restart Sensor
 		delay(20);
@@ -60,17 +60,26 @@ void Sensor::checkSensor()
 		}
 		installCalibration();
 	} else { // no error
-		if (system_status == 5) {
-			webpage->setUserMessage(F("Sensor fusion algorithm running+"));
-		} else if (system_status == 6){
-			webpage->setUserMessage(F("Sensor fusion algorithm not running!"));
-		} else if (system_status == 4){
-			webpage->setUserMessage(F("Executing Sensor Self-Test"));
-		} else if (system_status == 3){
-			webpage->setUserMessage(F("Sensor System Iniitalizing"));
-		} else if (system_status == 2){
+		switch (system_status) {
+			case 2:
 			webpage->setUserMessage(F("Initializing Sensor Peripherals"));
+			break;
+			case 3:
+			webpage->setUserMessage(F("Sensor System Iniitalizing"));
+			break;
+			case 4:
+			webpage->setUserMessage(F("Executing Sensor Self-Test"));
+			break;
+			case 5:
+			webpage->setUserMessage(F("Sensor fusion algorithm running+"));
+			break;
+			case 6:
+			webpage->setUserMessage(F("Sensor fusion algorithm not running!"));
+			break;
+			default:
+			break;
 		}
+
 	}
 	calok = calibrated (sys, gyro, accel, mag);
 	/* System Status (see section 4.3.58)
@@ -187,8 +196,9 @@ int8_t Sensor::getTempC()
 */
 bool Sensor::calibrated(uint8_t& sys, uint8_t& gyro, uint8_t& accel, uint8_t& mag)
 {
-	if (!sensor_found)
+	if (!sensor_found) {
 	    return (false);
+	}
 	sys = 0;
 	gyro = 0;
 	accel = 0;
@@ -239,6 +249,7 @@ void Sensor::readAzElT ()
 
 /*! @brief send latest values to web page
 *
+* @param client a reference to the calling WiFi client
 * N.B. labels must match ids in web page
 */
 

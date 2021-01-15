@@ -38,7 +38,7 @@
 #include "Easycomm.h"
 #define BAUDRATE        115200  ///<  Baudrate of Easycomm II protocol
 #define WP_INTERVAL      500     ///<  milliseconds interval for checking WebPage
-#define EC_INTERVAL      10      ///<  milliseconds interval for checking Serial for Easycomm commands
+#define EC_INTERVAL      50      ///<  milliseconds interval for checking Serial for Easycomm commands
 #define SENSOR_INTERVAL  500 ///<  milliseconds interval for reading Sensor
 #define CHECK_SENSOR_INTERVAL   60000 ///<  milliseconds interval for checking Sensor status
 
@@ -69,27 +69,28 @@ void setup() {
 }
 
 void loop() {
-  // check for rotctl activity on Serial port
-  if (is_timed_out(previous_time_ec, EC_INTERVAL)){
-    previous_time_ec = millis();
-    easycomm->easycomm_process();
+  if (!gimbal->isCalibrating){
+    // check for rotctl activity on Serial port
+    if (is_timed_out(previous_time_ec, EC_INTERVAL)) {
+      previous_time_ec = millis();
+      easycomm->easycomm_process();
+    }
+    // check for WiFi activity
+    if (is_timed_out(previous_time_wp, WP_INTERVAL)) {
+      previous_time_wp = millis();
+      webpage->checkEthernet();
+    }
+    // read Sensor position, Temperature
+    if (is_timed_out(previous_time_sensor, SENSOR_INTERVAL)) {
+      previous_time_sensor = millis();
+      sensor->readAzElT();
+    }
+    // read Sensor status
+    if (is_timed_out(previous_time_check_sensor, CHECK_SENSOR_INTERVAL)) {
+      previous_time_check_sensor = millis();
+      sensor->checkSensor();
+    }
   }
-  // check for WiFi activity
-  if (is_timed_out(previous_time_wp, WP_INTERVAL)){
-    previous_time_wp = millis();
-    webpage->checkEthernet();
-  }
-  // read Sensor position, Temperature
-  if (is_timed_out(previous_time_sensor, SENSOR_INTERVAL)){
-    previous_time_sensor = millis();
-    sensor->readAzElT();
-  }
-  // read Sensor status
-  if (is_timed_out(previous_time_check_sensor, CHECK_SENSOR_INTERVAL)) {
-		previous_time_check_sensor = millis();
-		sensor->checkSensor();
-	}
-
 }
 
 bool is_timed_out(uint32_t startTime_ms, uint32_t time_out_time) {

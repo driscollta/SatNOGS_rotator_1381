@@ -83,8 +83,7 @@ void Webpage::setUserMessage (const __FlashStringHelper *ifsh, const char *msg, 
 
 /*! @brief call this occasionally to check for Ethernet activity
  */
-void Webpage::
-checkEthernet()
+void Webpage::checkEthernet()
 {
     //< check WiFi if not connected and waited > 5 seconds
     if (WiFi.status() != WL_CONNECTED && (wifi_time_out++ > 25)) {
@@ -93,7 +92,7 @@ checkEthernet()
     }
 	//< now check our page
 	WiFiClient client = httpServer->available();
-	if (!client){
+	if (!client) {
 	    return;
     }
 	uint32_t to = millis();	//< init timeout
@@ -240,6 +239,7 @@ void Webpage::sendNewValues (WiFiClient client)
 }
 
 /*! @brief print the HTML style section of main page
+* @param client a reference to the calling WiFi client
 */
 
 void Webpage::printHTMLStyle (WiFiClient client)

@@ -1,10 +1,12 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
     "configurations": [
         {
-            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
-        },
-        {
-            "name": "Linux",
+            "name": "PlatformIO",
             "includePath": [
                 "/home/tommy_d/Documents/PlatformIO/Projects/SatNOGS_rotator_1381/include",
                 "/home/tommy_d/Documents/PlatformIO/Projects/SatNOGS_rotator_1381/src",
@@ -19,8 +21,8 @@
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                 "/home/tommy_d/.platformio/lib/Adafruit BNO055_ID506",
                 "/home/tommy_d/.platformio/lib/Adafruit BNO055_ID506/utility",
-                "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/home/tommy_d/.platformio/lib/Adafruit Unified Sensor_ID31",
+                "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
@@ -80,8 +82,13 @@
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/fb_gfx",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/variants/feather_esp32",
-                "/home/tommy_d/.platformio/lib/Adafruit ADXL343_ID6117",
-                "/home/tommy_d/.platformio/lib/Adafruit BusIO_ID6214",
+                "/home/tommy_d/.platformio/lib/Adafruit BME280 Library",
+                "/home/tommy_d/.platformio/lib/Adafruit BusIO",
+                "/home/tommy_d/.platformio/lib/Adafruit IO Arduino/src",
+                "/home/tommy_d/.platformio/lib/Adafruit MQTT Library",
+                "/home/tommy_d/.platformio/lib/ArduinoHttpClient/src",
+                "/home/tommy_d/.platformio/lib/ESP32Servo/src",
+                "/home/tommy_d/.platformio/lib/Ethernet/src",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                 "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/AzureIoT/src",
@@ -123,8 +130,8 @@
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                     "/home/tommy_d/.platformio/lib/Adafruit BNO055_ID506",
                     "/home/tommy_d/.platformio/lib/Adafruit BNO055_ID506/utility",
-                    "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/home/tommy_d/.platformio/lib/Adafruit Unified Sensor_ID31",
+                    "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
@@ -184,8 +191,13 @@
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/fb_gfx",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/variants/feather_esp32",
-                    "/home/tommy_d/.platformio/lib/Adafruit ADXL343_ID6117",
-                    "/home/tommy_d/.platformio/lib/Adafruit BusIO_ID6214",
+                    "/home/tommy_d/.platformio/lib/Adafruit BME280 Library",
+                    "/home/tommy_d/.platformio/lib/Adafruit BusIO",
+                    "/home/tommy_d/.platformio/lib/Adafruit IO Arduino/src",
+                    "/home/tommy_d/.platformio/lib/Adafruit MQTT Library",
+                    "/home/tommy_d/.platformio/lib/ArduinoHttpClient/src",
+                    "/home/tommy_d/.platformio/lib/ESP32Servo/src",
+                    "/home/tommy_d/.platformio/lib/Ethernet/src",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                     "/home/tommy_d/.platformio/packages/framework-arduinoespressif32/libraries/AzureIoT/src",
@@ -213,7 +225,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=40304",
+                "PLATFORMIO=50004",
                 "ARDUINO_FEATHER_ESP32",
                 "ESP32",
                 "ESP_PLATFORM",
@@ -226,7 +238,6 @@
                 "ARDUINO_BOARD=\"Adafruit ESP32 Feather\"",
                 ""
             ],
-            "intelliSenseMode": "clang-x64",
             "cStandard": "c99",
             "cppStandard": "c++11",
             "compilerPath": "/home/tommy_d/.platformio/packages/toolchain-xtensa32/bin/xtensa-esp32-elf-gcc",
