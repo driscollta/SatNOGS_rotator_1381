@@ -609,7 +609,7 @@ void Webpage::printHTMLSensorTable (WiFiClient client)
 */
 void Webpage::printHTMLGimbalTable (WiFiClient client)
 {
-    client.print (F(
+    client.print(F(
         "   <!-- N.B. beware that some ID's are used in a match in onOvd() --> \r\n"
         "   <tr> \r\n"
         "   <td colspan='7' style='text-align:left; border: none; ' > \r\n"
@@ -634,14 +634,14 @@ void Webpage::printHTMLGimbalTable (WiFiClient client)
         "               <td class='datum-label' > pulse length, &micro;s </td> \r\n"
         "               <td id='G_Mot1Pos' class='datum' width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot1Pos_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot1Pos_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
         "               </td> \r\n"
         " \r\n"
         "               <td class='datum-label' > pulse length, &micro;s </td> \r\n"
         "               <td id='G_Mot2Pos' class='datum'  width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot2Pos_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot2Pos_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
         "               </td> \r\n"
         "           </tr> \r\n"
@@ -649,15 +649,14 @@ void Webpage::printHTMLGimbalTable (WiFiClient client)
         "               <td class='datum-label' > minimum pulse </td> \r\n"
         "               <td id='G_Mot1Min' class='datum'  width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot1Min_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot1Min_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
-        "               </td> \r\n"
-    ));
-    client.print (F(
+        "               </td> \r\n"));
+    client.print(F(
         "               <td class='datum-label' > minimum pulse </td> \r\n"
         "               <td id='G_Mot2Min' class='datum'  width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot2Min_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot2Min_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
         "               </td> \r\n"
         "           </tr> \r\n"
@@ -665,13 +664,13 @@ void Webpage::printHTMLGimbalTable (WiFiClient client)
         "               <td class='datum-label' > maximum pulse </td> \r\n"
         "               <td id='G_Mot1Max' class='datum'  width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot1Max_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot1Max_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
         "               </td> \r\n"
         "               <td class='datum-label' > maximum pulse </td> \r\n"
         "               <td id='G_Mot2Max' class='datum'  width = 40 > ---- </td> \r\n"
         "               <td> \r\n"
-        "                   <input id='G_Mot2Max_Ovd' type='text' onkeypress='onOvd()' class='override' > \r\n"
+        "                   <input id='G_Mot2Max_Ovd' type='number' onkeypress='onOvd()' class='override' > \r\n"
         "                   </input> \r\n"
         "               </td> \r\n"
         "           </tr> \r\n"
@@ -703,8 +702,7 @@ void Webpage::printHTMLGimbalTable (WiFiClient client)
         "       </table> \r\n"
         "   </td> \r\n"
         " </tr> \r\n"
-        " </table> \r\n"
-    ));
+        " </table> \r\n"));
 }
 
 /*! @brief send the main page
