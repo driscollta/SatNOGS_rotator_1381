@@ -193,14 +193,15 @@ void Webpage::overrideValue (WiFiClient client)
 		    buf[nbuf++] = c;
         }
 	}
-	if (c == 0)
+	if (c == 0) {
 	    return;		//< bogus; let caller close
-
+    }
 	//< break at = into name, value
 	char *valu = strchr (buf, '=');
-	if (!valu)
+	if (!valu) {
 	    return;		//< bogus; let caller close
-	*valu++ = '\0';	//< replace = with 0 then valu starts at next char
+    }
+    *valu++ = '\0';	//< replace = with 0 then valu starts at next char
 	//< now buf is NAME and valu is VALUE
     if (strcmp (buf, "Decl") == 0) {
 		nv->mag_decl = (float) atof(valu);

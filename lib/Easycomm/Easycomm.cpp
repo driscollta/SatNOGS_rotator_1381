@@ -178,7 +178,7 @@ void Easycomm::dealWithStatusCommand(char statusNumber) {
       break;
     case '4':
       //< Get the current position of elevation in deg
-        statusString = String(sensor->getSensorEl(), 1);
+      statusString = String(sensor->getSensorEl(), 1);
         break;
     case '5':
       //< Get the load of azimuth, in range of 0-1023
@@ -208,8 +208,9 @@ void Easycomm::dealWithStatusCommand(char statusNumber) {
 * @param client a reference to the WiFiClient
 * N.B. must match id's in main web page
 */
-void Easycomm::sendNewValues (WiFiClient client)
-{
-	client.print (F("rotctl_message="));
-    client.println(buffer);
+          void
+          Easycomm::sendNewValues(WiFiClient client)
+      {
+          client.print(F("rotctl_message="));
+          client.println(buffer);
 }

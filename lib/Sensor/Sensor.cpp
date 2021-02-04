@@ -29,7 +29,7 @@ Sensor::Sensor()
 	//< instantiate, discover and initialize
 	bno = new Adafruit_BNO055(-1, I2CADDR);
 	sensor_found = bno->begin(Adafruit_BNO055::OPERATION_MODE_NDOF);
-	installCalibration();
+	//installCalibration();
 	system_status = 1;
 	self_test_results = 0;
 	system_error = 3;
@@ -58,7 +58,7 @@ void Sensor::checkSensor()
 			calok = false;
 			webpage->setUserMessage(F("Sensor not found!"));
 		}
-		installCalibration();
+		//installCalibration();
 	} else { // no error
 		switch (system_status) {
 			case 2:
@@ -300,7 +300,7 @@ void Sensor::sendNewValues (WiFiClient client)
 bool Sensor::overrideValue (char *name, char *value)
 {
 	if (!strcmp (name, "SS_Save")) {
-	    saveCalibration();
+	    //saveCalibration();
 	    webpage->setUserMessage (F("Sensor calibrations saved to EEPROM+"));
 	    return (true);
 	}

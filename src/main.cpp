@@ -36,17 +36,21 @@
 #include "NV.h"
 #include "Gimbal.h"
 #include "Easycomm.h"
+#include "UpgradeESP32.h"
+
 #define BAUDRATE        115200  ///<  Baudrate of Easycomm II protocol
-#define WP_INTERVAL      500     ///<  milliseconds interval for checking WebPage
+#define WP_INTERVAL      501     ///<  milliseconds interval for checking WebPage
 #define EC_INTERVAL      50      ///<  milliseconds interval for checking Serial for Easycomm commands
-#define SENSOR_INTERVAL  500 ///<  milliseconds interval for reading Sensor
-#define CHECK_SENSOR_INTERVAL   60000 ///<  milliseconds interval for checking Sensor status
+#define SENSOR_INTERVAL  733 ///<  milliseconds interval for reading Sensor
+#define CHECK_SENSOR_INTERVAL   60017 ///<  milliseconds interval for checking Sensor status
 
 Sensor *sensor;
 Webpage *webpage;
 NV *nv;
 Gimbal *gimbal;
 Easycomm *easycomm;
+UpgradeESP32 *upgradeESP32;
+
 bool is_timed_out(uint32_t start_time, uint32_t time_interval);
 uint32_t previous_time_ec;
 uint32_t previous_time_wp;
@@ -64,8 +68,10 @@ void setup() {
   sensor = new Sensor();
   gimbal = new Gimbal();
   webpage = new Webpage();
+  upgradeESP32 = new UpgradeESP32();
+
   delay(1000);
-  sensor->checkSensor();
+  //sensor->checkSensor();
 }
 
 void loop() {
@@ -79,7 +85,9 @@ void loop() {
     if (is_timed_out(previous_time_wp, WP_INTERVAL)) {
       previous_time_wp = millis();
       webpage->checkEthernet();
+      upgradeESP32->checkPortServer();
     }
+
     // read Sensor position, Temperature
     if (is_timed_out(previous_time_sensor, SENSOR_INTERVAL)) {
       previous_time_sensor = millis();

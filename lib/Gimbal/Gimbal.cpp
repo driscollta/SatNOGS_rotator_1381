@@ -412,12 +412,11 @@ void Gimbal::sendNewValues(WiFiClient client)
 		return;
 	}
 
-	if (init_step > 0) {
-		client.print(F("G_Mot1Pos="));
-		client.println(motor[0].pos);
-		client.print(F("G_Mot2Pos="));
-		client.println(motor[1].pos);
-	}
+	client.print(F("G_Mot1Pos="));
+	client.println(motor[0].pos);
+	client.print(F("G_Mot2Pos="));
+	client.println(motor[1].pos);
+
 	client.print(F("G_Mot1Max="));
 	client.println(motor[0].max);
 	client.print(F("G_Mot1Min="));
