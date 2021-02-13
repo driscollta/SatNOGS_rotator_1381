@@ -65,13 +65,11 @@ class Sensor {
 	Sensor();
 	void checkSensor();
 	int8_t getTempC();
-	void saveCalibration(void);
 	float getSensorAz ();
 	float getSensorEl ();
 	void readAzElT ();
 	void sendNewValues (WiFiClient client);
 	bool connected() { return sensor_found; };
-	void installCalibration(void);
 	bool overrideValue (char *name, char *value);
 };
 

@@ -39,10 +39,10 @@
 #include "UpgradeESP32.h"
 
 #define BAUDRATE        115200  ///<  Baudrate of Easycomm II protocol
-#define WP_INTERVAL      501     ///<  milliseconds interval for checking WebPage
+#define WP_INTERVAL      401     ///<  milliseconds interval for checking WebPage
 #define EC_INTERVAL      50      ///<  milliseconds interval for checking Serial for Easycomm commands
-#define SENSOR_INTERVAL  733 ///<  milliseconds interval for reading Sensor
-#define CHECK_SENSOR_INTERVAL   60017 ///<  milliseconds interval for checking Sensor status
+#define SENSOR_INTERVAL  233 ///<  milliseconds interval for reading Sensor
+#define CHECK_SENSOR_INTERVAL   30017 ///<  milliseconds interval for checking Sensor status
 
 Sensor *sensor;
 Webpage *webpage;
@@ -71,7 +71,7 @@ void setup() {
   upgradeESP32 = new UpgradeESP32();
 
   delay(1000);
-  //sensor->checkSensor();
+  sensor->checkSensor();
 }
 
 void loop() {

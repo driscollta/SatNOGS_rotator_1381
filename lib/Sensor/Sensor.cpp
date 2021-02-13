@@ -29,7 +29,6 @@ Sensor::Sensor()
 	//< instantiate, discover and initialize
 	bno = new Adafruit_BNO055(-1, I2CADDR);
 	sensor_found = bno->begin(Adafruit_BNO055::OPERATION_MODE_NDOF);
-	//installCalibration();
 	system_status = 1;
 	self_test_results = 0;
 	system_error = 3;
@@ -58,7 +57,6 @@ void Sensor::checkSensor()
 			calok = false;
 			webpage->setUserMessage(F("Sensor not found!"));
 		}
-		//installCalibration();
 	} else { // no error
 		switch (system_status) {
 			case 2:
@@ -106,71 +104,8 @@ void Sensor::checkSensor()
    */
 }
 
-/*! @brief install previously stored calibration data from EEPROM if it looks valid.
-*
-* Use stock Adafruit library so pulled from
-* post by protonstorm at https://forums.adafruit.com/viewtopic.php?f=19&t=75497
-*/
-void Sensor::installCalibration()
-{
-	byte nbytes = (byte)sizeof(nv->BNO055cal);
-	//< read from EEPROM, qualify
-	nv->get();	//< read from EEPROM, qualify
-	uint8_t i;
-	for(i = 0; i < nbytes; i++) {
-	    if (nv->BNO055cal[i] != 0)
-		break;
-	}
-	if (i == nbytes) {
-		webpage->setUserMessage(F("Sensor calibration not valid"));
-	    return;	//< all zeros can't be valid
-	}
-	bno->setMode (Adafruit_BNO055::OPERATION_MODE_CONFIG);	//< put into config mode
-	delay(25);
 
-	// set from NV
-	for(uint8_t i = 0; i < nbytes; i++) {
-	    Wire.beginTransmission((uint8_t)I2CADDR);
-	    Wire.write((Adafruit_BNO055::adafruit_bno055_reg_t)
-	    		((uint8_t)(Adafruit_BNO055::ACCEL_OFFSET_X_LSB_ADDR)+i));
-	    Wire.write(nv->BNO055cal[i]);
-	    Wire.endTransmission();
-	}
-	bno->setMode (Adafruit_BNO055::OPERATION_MODE_NDOF);	//< restore NDOF mode
-	delay(25);
-}
 
-/*! @brief read the sensor calibration values and save into EEPROM.
-*
-* Use stock Adafruit library so pulled from post by protonstorm at
-* https://forums.adafruit.com/viewtopic.php?f=19&t=75497
-*/
-void Sensor::saveCalibration()
-{
-	byte nbytes = (byte)sizeof(nv->BNO055cal);
-	// put into config mode
-	bno->setMode (Adafruit_BNO055::OPERATION_MODE_CONFIG);
-	delay(25);
-
-	// request all bytes starting with the ACCEL
-	Wire.beginTransmission((uint8_t)I2CADDR);
-	Wire.write((uint8_t)(Adafruit_BNO055::ACCEL_OFFSET_X_LSB_ADDR));
-	Wire.endTransmission();
-	Wire.requestFrom((uint8_t)I2CADDR, nbytes);
-
-	// wait for all 22 bytes to be available
-	while (Wire.available() < nbytes);
-
-	// copy to NV
-	for (uint8_t i = 0; i < nbytes; i++) {
-	    nv->BNO055cal[i] = Wire.read();
-	}
-	// restore NDOF mode
-	bno->setMode (Adafruit_BNO055::OPERATION_MODE_NDOF);
-	delay(25);
-	// save in EEPROM
-	nv->put();
-}
 
 /*! @brief read the current temperature, in degrees C
 *
@@ -299,10 +234,6 @@ void Sensor::sendNewValues (WiFiClient client)
 */
 bool Sensor::overrideValue (char *name, char *value)
 {
-	if (!strcmp (name, "SS_Save")) {
-	    //saveCalibration();
-	    webpage->setUserMessage (F("Sensor calibrations saved to EEPROM+"));
-	    return (true);
-	}
+
 	return (false);
 }

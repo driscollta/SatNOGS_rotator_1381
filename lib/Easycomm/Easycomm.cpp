@@ -30,7 +30,8 @@ char buffer[BUFFER_SIZE];
 * '\n' is new-line command terminator for positioning commands 
 * commands like IP, GE are terminated with carriage return '\r'
 */
-void Easycomm::easycomm_process() {
+void Easycomm::easycomm_process() 
+{
     float az_input, el_input;
     char incomingByte;
     static uint16_t bufferCnt = 0;
@@ -137,7 +138,8 @@ bool Easycomm::readAzEl(float *az_input, float *el_input, char buffer[])
 * @param input the char[] to inspect for numeric characters
 * @return true if all characters in input are numeric
 */
-bool Easycomm::isNumber(char input[]) {
+bool Easycomm::isNumber(char input[]) 
+{
   for (uint16_t i = 0; input[i] != '\0'; i++) {
     if (isalpha(input[i]))
       return false;
@@ -156,7 +158,8 @@ void Easycomm::reportPosition() {
 /*! @brief generate reply to status rotctl commands starting with 'IP'
 *  most are not relevant
 */
-void Easycomm::dealWithStatusCommand(char statusNumber) {
+void Easycomm::dealWithStatusCommand(char statusNumber) 
+{
     String statusString;
     
     switch (statusNumber) {
@@ -208,9 +211,8 @@ void Easycomm::dealWithStatusCommand(char statusNumber) {
 * @param client a reference to the WiFiClient
 * N.B. must match id's in main web page
 */
-          void
-          Easycomm::sendNewValues(WiFiClient client)
-      {
-          client.print(F("rotctl_message="));
-          client.println(buffer);
+void Easycomm::sendNewValues(WiFiClient client)
+{
+    client.print(F("rotctl_message="));
+    client.println(buffer);
 }

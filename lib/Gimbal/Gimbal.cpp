@@ -110,6 +110,9 @@ void Gimbal::moveToAzEl(float az_t, float el_t)
 	uint32_t _now = millis();
 	//< only update every UPD_PERIOD
 	if (_now < last_update + UPD_PERIOD) {
+		if (gimbal->DEBUG_GIMBAL) {
+			Serial.print(F("returning from moveToAzEl, called before UPD_PERIOD"));
+		}
 		return;
 	}
 	last_update = _now;
@@ -168,7 +171,7 @@ void Gimbal::calibrate(float &az_s, float &el_s)
 	//< handy step ranges
 	uint16_t _range0 = motor[0].max - motor[0].min;
 	uint16_t _range1 = motor[1].max - motor[1].min;
-	webpage->setUserMessage(F("Calibrating gimbal"));
+	//webpage->setUserMessage(F("Calibrating gimbal"));
 	isCalibrating = true;
 	//< init_step starts at 0; incremented each time function is called
 	switch (init_step++) {
@@ -398,7 +401,41 @@ void Gimbal::setMotorPosition(uint8_t motn, uint16_t newpos)
 	}
 	mip->del_pos = (int)newpos - (int)mip->pos;
 	mip->pos = newpos;
+	if (gimbal->DEBUG_GIMBAL) {
+		Serial.print(F("Set motor position: "));
+		Serial.println(newpos);
+	}
 	pwm->setPWM(mip->servo_num, 0, mip->pos / US_PER_BIT);
+	if (readPWM(mip->servo_num, true) != 0 || readPWM(mip->servo_num, false != mip->pos / US_PER_BIT)){
+		// send again; could also dis-able the PCA9685 before re-sending
+		pwm->setPWM(mip->servo_num, 0, mip->pos / US_PER_BIT);
+		if (gimbal->DEBUG_GIMBAL) {
+			Serial.println(F("I2C bus error, rewriting motor position"));
+		}
+	}
+}
+
+/*! @brief read pulsewidth (bits 0->4096) from spec'd channel to see if it matches what we set
+* in setMotorPosition()
+
+* @param motn is the channel number
+* @param on is a switch to say whether we want the "on" PWM bits or the "off" bits
+* we always set "on" to 0, but we should check if it is 0.
+* reference: https://thecavepearlproject.org/2017/11/03/configuring-i2c-sensors-with-arduino/
+*/
+uint16_t Gimbal::readPWM(uint8_t motn, bool on) 
+{
+  uint16_t _value;
+  // on == true means we want to read ON PWM value; true = 1, so invert to point to PCA9685_LED0_OFF_L
+  uint8_t _register_addr = PCA9685_LED0_ON_L + 2 * (int)!on + 4 * motn;
+  Wire.beginTransmission(I2C_ADDR);      // set sensor target
+  Wire.write(_register_addr);            // set memory pointer
+  Wire.endTransmission();
+  Wire.requestFrom((int)I2C_ADDR, (int) 2); // request two bytes
+  byte _registerDataLo = Wire.read(); // get low byte
+  byte _registerDataHi = Wire.read(); // get high byte
+  _value = (((int)_registerDataHi) << 8) | _registerDataLo; // combine two bytes
+  return (_value);
 }
 
 /*! @brief send latest values to web page
@@ -537,14 +574,14 @@ bool Gimbal::overrideValue(char *name, char *value)
 				//< have to do this for 4 steps, incrementing init_step each time
 				//< we can use 'delay()' since this is called by pressing a button
 				while (!calibrated()) {
+					last_update = 0; // override the update-period "UPD"
 					//< the values passed, "init_step * 5" are arbitrary
 					moveToAzEl(init_step * 5, init_step * 5);
 					delay(200);
 				}
 				delay(1000);
 				moveToAzEl(G_HOME_AZ, G_HOME_EL);
-				delay(200);
-				//< may have to do this twice
+				delay(1000);
 				moveToAzEl(G_HOME_AZ, G_HOME_EL);
 				webpage->setUserMessage(F("Gimbal calibrated+"));
 			} else {

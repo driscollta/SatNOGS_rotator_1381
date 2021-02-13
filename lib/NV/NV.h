@@ -32,7 +32,6 @@ class NV {
         enum {
             MAGIC  = 0x5a5aa5a5,            //< used to validate the EEPROM stored values
             EEBASE = 0,                     //< address of the EEPROM storage area
-            NBNO055CALBYTES = 22,           //< bytes needed for the BNO055 calibration
         };
 
     public:
@@ -45,7 +44,6 @@ class NV {
         uint32_t magic;                     //< magic # read from EEPROM
         uint16_t mot0min, mot0max;          //< motor 0 minimum and maximum pulse durations
         uint16_t mot1min, mot1max;          //< motor 1 minimum and maximum pulse durations
-        uint8_t BNO055cal[NBNO055CALBYTES]; //< BNO055 sensor calibration values
         float_t mag_decl;                   //< magnetic declination of user location
         float_t m0_azscale, m0_elscale;     //< motor 0 azimuth and elevation conversion from degrees to usec pulse width
         float_t m1_azscale, m1_elscale;     //< motor 1 azimuth and elevation conversion from degrees to usec pulse width

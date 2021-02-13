@@ -84,7 +84,8 @@ class Gimbal {
 	void reCal(float& az_s, float& el_s);
 	void installCalibration();
 	void saveCalibration();
-	
+	uint16_t readPWM(uint8_t ledNum, bool on);
+
     public:
 	boolean isCalibrating;
 	Gimbal();
